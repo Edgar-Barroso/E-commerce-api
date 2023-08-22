@@ -1,19 +1,19 @@
 import { DomainEvent } from "./DomainEvent";
 import { Handler } from "./Handler";
 
-export class Broker{
+export class Broker {
     private handlers: Handler[];
-    constructor(){
-        this.handlers = []
+    constructor() {
+        this.handlers = [];
     }
 
-    register(handler:Handler){
-        this.handlers.push(handler)
+    register(handler: Handler) {
+        this.handlers.push(handler);
     }
-    async publish(event:DomainEvent){
-        for(const handler of this.handlers){
-            if(handler.name===event.name){
-                await handler.handle(event)
+    publish(event: DomainEvent) {
+        for (const handler of this.handlers) {
+            if (handler.name === event.name) {
+                handler.handle(event);
             }
         }
     }
